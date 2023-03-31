@@ -24,9 +24,9 @@
 </template>
 <script>
 import { nameRule, passwordRule } from '../utils/validate.js';
-// import { login } from '@/api/api.js'
-//import { setItem } from '@/utils/setToken.js';
-// import { setIToken } from '@/utils/setToken.js';
+import { login } from '@/api/api.js'
+// import { setItem } from '@/utils/setToken.js';
+import { setToken } from '@/utils/setToken.js';
 export default {
     data() {
 
@@ -39,15 +39,13 @@ export default {
                 password: [{ validator: passwordRule, trigger: 'blur' }],
             }
         }
-    }, methods: {
+    },
+    methods: {
         login(form) {
             this.$refs[form].validate((valid) => {
                 if (valid) {
                     console.log(this.form);
-                    this.service.post('/login', this.form)
-                        .then(res => {
-                            console.log(res)
-                        })
+
                     /*    this.axios.post("https://www.showdoc.com.cn/jinducasey/8321036098744323", this.form)
                            .then(res => {
                                console.log(res)
@@ -60,27 +58,39 @@ export default {
                            }).catch(err => {
                                console.error(err)
                            }) */
-                    // login(this.form)
-                    //     .then(res => {
-                    //         console.log(res)
-                    //         if (res.data.status === 200) {
-                    //             setIToken.setItem('username', res.data.username)
-                    //             this.$message({ message: res.data.message, type: 'success' })
-                    //             this.$router.push('/home')
-                    //         }
+                    login(this.form)
+                        .then(res => {
+                            console.log(res)
+                            if (res.data.status === 200) {
+                                setToken('username', res.data.username)
+                                setToken('token', res.data.token)
+                                this.$message({ message: res.data.message, type: 'success' })
+                                this.$router.push('/home')
+                            }
 
-                    //     })
-                    // this.service.post('/login', this.form)
-                    //     .then(res => {
-                    //         console.log(res)
-                    //     })
-                } else {
+                            //     })
+                            // this.service.post('/login', this.form)
+                            //     .then(res => {
+                            //         console.log(res)
+                            //     })
+                            /*      this.service.post('/login', this.form)
+                                     .then(res => {
+                                         console.log(res)
+                                     }) }  */
+
+
+                        })
+
+                }
+                else {
                     console.log(this.form);
                 }
-            })
+            }
+
+            )
         }
     }
-}
+}    
 </script>
 <style lang="scss">
 .login {
