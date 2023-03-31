@@ -20,5 +20,11 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
+
+### 连接  
+https://www.showdoc.com.cn/jinducasey/8309065269806678
+
+
+
+### jinduVIP Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
